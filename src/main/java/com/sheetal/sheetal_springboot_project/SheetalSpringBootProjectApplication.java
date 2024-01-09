@@ -13,6 +13,7 @@ public class SheetalSpringBootProjectApplication {
         System.out.println("Wlocme to session2");
         System.out.println("welocme to session 3");
         System.out.println("Testing purpose");
+        System.out.println("Welcome to Java");
         test();
     }
 
