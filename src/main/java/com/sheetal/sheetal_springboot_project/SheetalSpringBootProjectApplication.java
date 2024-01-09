@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SheetalSpringBootProjectApplication {
 
     public static void main(String[] args) {
-        System.out.println("welcoem to java");
         SpringApplication.run(SheetalSpringBootProjectApplication.class, args);
     }
 }
