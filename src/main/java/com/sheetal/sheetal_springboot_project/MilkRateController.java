@@ -10,8 +10,23 @@ public class MilkRateController {
     @Autowired
     private MilkRateService milkRateService;
 
+    //Constructor Injection
+//    private MilkRateService milkRateService;
+//    @Autowired
+//    public MilkRateController(MilkRateService milkRateService) {
+//        this.milkRateService = milkRateService;
+//    }
+
+
+    //Setter Injection
+    //private MilkRateService milkRateService;
+//    @Autowired
+//    public void setMilkRateService(MilkRateService milkRateService) {
+//        this.milkRateService = milkRateService;
+//    }
+
     @GetMapping("/getMilkRate")
-    public int getMilkRate() {
+    public Model getMilkRate() {
         return milkRateService.milkRateService();
     }
 }

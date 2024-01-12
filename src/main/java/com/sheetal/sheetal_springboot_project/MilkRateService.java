@@ -9,7 +9,11 @@ public class MilkRateService {
     @Value("${milkRate}")
     private int milkRate;
 
-    public int milkRateService() {
-        return milkRate;
+    public Model milkRateService() {
+        Model model = new Model();
+        model.setMessage("Milk Rate has been successfully fetched");
+        model.setStatus(200);
+        model.setAmount(milkRate);
+        return model;
     }
 }
