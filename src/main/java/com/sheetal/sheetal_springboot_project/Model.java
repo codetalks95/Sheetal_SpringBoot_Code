@@ -4,6 +4,7 @@ public class Model {
     private int status;
     private String message;
     private RateClass rateClass;
+    private MilkRateClass milkRateClass;
 
     public int getStatus() {
         return status;
@@ -27,5 +28,13 @@ public class Model {
 
     public void setRateClass(RateClass rateClass) {
         this.rateClass = rateClass;
+    }
+
+    public MilkRateClass getMilkRateClass() {
+        return milkRateClass;
+    }
+
+    public void setMilkRateClass(MilkRateClass milkRateClass) {
+        this.milkRateClass = milkRateClass;
     }
 }
