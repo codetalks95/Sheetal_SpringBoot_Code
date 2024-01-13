@@ -3,7 +3,7 @@ package com.sheetal.sheetal_springboot_project;
 public class Model {
     private int status;
     private String message;
-    private int amount;
+    private RateClass rateClass;
 
     public int getStatus() {
         return status;
@@ -21,11 +21,11 @@ public class Model {
         this.message = message;
     }
 
-    public int getAmount() {
-        return amount;
+    public RateClass getRateClass() {
+        return rateClass;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setRateClass(RateClass rateClass) {
+        this.rateClass = rateClass;
     }
 }
