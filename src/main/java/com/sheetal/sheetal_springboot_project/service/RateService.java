@@ -1,5 +1,11 @@
-package com.sheetal.sheetal_springboot_project;
+package com.sheetal.sheetal_springboot_project.service;
 
+
+import com.sheetal.sheetal_springboot_project.entity.MilkRateClass;
+import com.sheetal.sheetal_springboot_project.entity.RateClass;
+import com.sheetal.sheetal_springboot_project.repository.MilkRateRepository;
+import com.sheetal.sheetal_springboot_project.repository.RateRepository;
+import com.sheetal.sheetal_springboot_project.response.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -25,7 +31,7 @@ public class RateService {
     @Value("${milkRate}")
     private int milkRate;
 
-    public Model milkRateService() {
+    public Model getMilkRateData() {
         RateClass rateClass = new RateClass();
         Model model = new Model();
 
@@ -49,7 +55,7 @@ public class RateService {
         return model;
     }
 
-    public Model saveMilkRate(int milkRate) {
+    public Model saveDataForMilkRate(int milkRate) {
         MilkRateClass milkRateClass = new MilkRateClass();
         Model model = new Model();
         model.setMessage("Milk Rate has been successfully fetched!");
@@ -62,7 +68,7 @@ public class RateService {
         return model;
     }
 
-    public Model putMappingSave(int milkRate, int id) {
+    public Model updateDataForMilkRate(int milkRate, int id) {
         Model model = new Model();
         Optional<MilkRateClass> milkRateClass = milkRateRepository.findById(id);
         if (milkRateClass.isPresent()) {
@@ -79,7 +85,7 @@ public class RateService {
         return model;
     }
 
-    public Model deleteMilkRate(int id) {
+    public Model deleteDataFromMilkRate(int id) {
         Model model = new Model();
         Optional<MilkRateClass> milkRateClass = milkRateRepository.findById(id);
         if (milkRateClass.isEmpty()) {
@@ -93,7 +99,7 @@ public class RateService {
         return model;
     }
 
-    public Model patchMilkRate(int id, Map<String, Object> map) {
+    public Model partialUpdateDataForMilkRate(int id, Map<String, Object> map) {
         Model model = new Model();
         Optional<RateClass> rateClass = rateRepository.findById(id);
         if (rateClass.isPresent()) {

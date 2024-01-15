@@ -1,4 +1,4 @@
-package com.sheetal.sheetal_springboot_project;
+package com.sheetal.sheetal_springboot_project.entity;
 
 import jakarta.persistence.*;
 

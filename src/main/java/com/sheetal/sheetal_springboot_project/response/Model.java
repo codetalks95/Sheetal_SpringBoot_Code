@@ -1,4 +1,7 @@
-package com.sheetal.sheetal_springboot_project;
+package com.sheetal.sheetal_springboot_project.response;
+
+import com.sheetal.sheetal_springboot_project.entity.MilkRateClass;
+import com.sheetal.sheetal_springboot_project.entity.RateClass;
 
 public class Model {
     private int status;
