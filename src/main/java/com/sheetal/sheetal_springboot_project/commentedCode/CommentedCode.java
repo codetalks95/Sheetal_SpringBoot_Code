@@ -1,7 +1,5 @@
 package com.sheetal.sheetal_springboot_project.commentedCode;
 
-import com.sheetal.sheetal_springboot_project.service.RateService;
-
 public class CommentedCode {
 
 //    private final RateService rateService;
