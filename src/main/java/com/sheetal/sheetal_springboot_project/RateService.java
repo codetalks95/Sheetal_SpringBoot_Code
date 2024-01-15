@@ -39,9 +39,9 @@ public class RateService {
                 rateClass.setDate(String.valueOf(new Date()));
             }
             model.setMilkRateClass(rateClass1.get());
-            model.setMessage("The Data has been successfully fetched");
+            model.setMessage("The Data has been successfully fetched!");
         } else {
-            model.setMessage("Id is not found in the Database");
+            model.setMessage("Id is not found in the Database!");
         }
         rateRepository.save(rateClass);
         model.setStatus(200);
@@ -52,7 +52,7 @@ public class RateService {
     public Model saveMilkRate(int milkRate) {
         MilkRateClass milkRateClass = new MilkRateClass();
         Model model = new Model();
-        model.setMessage("Milk Rate has been successfully fetched");
+        model.setMessage("Milk Rate has been successfully fetched!");
         milkRateClass.setMilkRate(milkRate);
         milkRateClass.setDate(String.valueOf(new Date()));
         milkRateRepository.save(milkRateClass);
@@ -70,10 +70,10 @@ public class RateService {
             milkRateClass.get().setDate(String.valueOf(new Date()));
             milkRateRepository.save(milkRateClass.get());
             model.setMilkRateClass(milkRateClass.get());
-            model.setMessage("Data has been updated successfully");
+            model.setMessage("Data has been updated successfully!");
             model.setStatus(200);
         } else {
-            model.setMessage("Id doesn't exist,Please give a retry with correct Id");
+            model.setMessage("Id doesn't exist,Please give a retry with correct Id!");
             model.setStatus(400);
         }
         return model;
@@ -83,17 +83,18 @@ public class RateService {
         Model model = new Model();
         Optional<MilkRateClass> milkRateClass = milkRateRepository.findById(id);
         if (milkRateClass.isEmpty()) {
-            model.setMessage("Id has not been found");
+            model.setMessage("Id has not been found!");
             model.setStatus(500);
         } else {
             milkRateRepository.deleteById(milkRateClass.get().getId());
-            model.setMessage("Id has been deleted successfully");
+            model.setMessage("Id has been deleted successfully!");
             model.setStatus(200);
         }
         return model;
     }
 
-    public RateClass patchMilkRate(int id, Map<String, Object> map) {
+    public Model patchMilkRate(int id, Map<String, Object> map) {
+        Model model = new Model();
         Optional<RateClass> rateClass = rateRepository.findById(id);
         if (rateClass.isPresent()) {
             for (Map.Entry<String, Object> entry : map.entrySet()) {
@@ -103,8 +104,13 @@ public class RateService {
                 field.setAccessible(true);
                 ReflectionUtils.setField(field, rateClass.get(), value);
             }
-            return rateRepository.save(rateClass.get());
+            model.setRateClass(rateClass.get());
+            model.setMessage("Partial Data has been Updated Successfully!");
+            model.setStatus(200);
+            return model;
         }
-        return null;
+        model.setMessage("Id can't be found,Please give a retry!");
+        model.setStatus(200);
+        return model;
     }
 }

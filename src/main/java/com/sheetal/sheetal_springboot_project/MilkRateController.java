@@ -8,7 +8,7 @@ import java.util.Map;
 @RestController
 public class MilkRateController {
 
-    private RateService rateService;
+    private final RateService rateService;
 
     @Autowired
     public MilkRateController(RateService rateService) {
@@ -47,7 +47,7 @@ public class MilkRateController {
     }
 
     @PatchMapping("/milkRatePatchMapping/{id}")
-    public RateClass patchPartialDataMapping(@PathVariable int id , @RequestBody Map<String, Object> map) {
+    public Model patchPartialDataMapping(@PathVariable int id , @RequestBody Map<String, Object> map) {
         return rateService.patchMilkRate(id , map);
     }
 
