@@ -35,6 +35,7 @@ public class RateService {
                 rateClass.setPaneerRate(Math.round(rateClass1.get().getMilkRate() * 8 / 3));
                 rateClass.setDate(String.valueOf(new Date()));
             }
+            model.setMilkRateClass(rateClass1.get());
         }
         rateRepository.save(rateClass);
         model.setStatus(200);
