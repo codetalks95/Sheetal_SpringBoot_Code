@@ -1,10 +1,9 @@
 package com.sheetal.sheetal_springboot_project;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 public class MilkRateController {
@@ -32,13 +31,28 @@ public class MilkRateController {
 //        this.milkRateService = milkRateService;
 //    }
 
-    @GetMapping("/getMilkRate")
+    @GetMapping("/milkRateGetMapping")
     public Model getMilkRate() {
         return rateService.milkRateService();
     }
 
-    @PostMapping("/saveMilkRate/{milkRate}")
-    public Model getMilkRate(@PathVariable int milkRate) {
+    @PostMapping("/milkRatePostMapping/{milkRate}")
+    public Model saveMilkRatePostMapping(@PathVariable int milkRate) {
         return rateService.saveMilkRate(milkRate);
+    }
+
+    @PutMapping("/milkRatePutMapping/{milkRate}/{id}")
+    public Model saveMilkRatePutMapping(@PathVariable int milkRate ,@PathVariable int id) {
+        return rateService.putMappingSave(milkRate,id);
+    }
+
+    @PatchMapping("/milkRatePatchMapping/{id}")
+    public RateClass patchPartialDataMapping(@PathVariable int id , @RequestBody Map<String, Object> map) {
+        return rateService.patchMilkRate(id , map);
+    }
+
+    @DeleteMapping("/milkRateDeleteMapping/{id}")
+    public Model deleteMilkRateMapping(@PathVariable int id) {
+        return rateService.deleteMilkRate(id);
     }
 }
