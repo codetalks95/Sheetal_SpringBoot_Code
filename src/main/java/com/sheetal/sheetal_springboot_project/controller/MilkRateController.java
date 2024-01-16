@@ -3,6 +3,7 @@ package com.sheetal.sheetal_springboot_project.controller;
 import com.sheetal.sheetal_springboot_project.response.Model;
 import com.sheetal.sheetal_springboot_project.service.RateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -17,7 +18,7 @@ public class MilkRateController {
         this.rateService = rateService;
     }
 
-    @GetMapping("/getMappingForMilkRate")
+    @GetMapping(value = "/getMappingForMilkRate", produces = {"application/xml", "text/xml"}, consumes = MediaType.ALL_VALUE)
     public Model getMappingForMilkRate() {
         return rateService.getMilkRateData();
     }

@@ -2,7 +2,9 @@ package com.sheetal.sheetal_springboot_project.response;
 
 import com.sheetal.sheetal_springboot_project.entity.MilkRateClass;
 import com.sheetal.sheetal_springboot_project.entity.RateClass;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class Model {
     private int status;
     private String message;
