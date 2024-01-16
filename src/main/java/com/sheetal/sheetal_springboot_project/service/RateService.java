@@ -101,22 +101,33 @@ public class RateService {
 
     public Model partialUpdateDataForMilkRate(int id, Map<String, Object> map) {
         Model model = new Model();
-        Optional<RateClass> rateClass = rateRepository.findById(id);
-        if (rateClass.isPresent()) {
-            for (Map.Entry<String, Object> entry : map.entrySet()) {
-                String key = entry.getKey();
-                Object value = entry.getValue();
-                Field field = ReflectionUtils.findField(RateClass.class, key);
-                field.setAccessible(true);
-                ReflectionUtils.setField(field, rateClass.get(), value);
-            }
-            model.setRateClass(rateClass.get());
+        Optional<RateClass> rateClassOptional = rateRepository.findById(id);
+
+        if (rateClassOptional.isPresent()) {
+            RateClass rateClass = rateClassOptional.get();
+            updateFields(rateClass, map);
+
+            model.setRateClass(rateClass);
             model.setMessage("Partial Data has been Updated Successfully!");
             model.setStatus(200);
-            return model;
+        } else {
+            model.setMessage("Id not found. Please retry!");
+            model.setStatus(200);
         }
-        model.setMessage("Id can't be found,Please give a retry!");
-        model.setStatus(200);
+
         return model;
+    }
+
+    private void updateFields(RateClass rateClass, Map<String, Object> map) {
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            Field field = ReflectionUtils.findField(RateClass.class, key);
+
+            if (field != null) {
+                field.setAccessible(true);
+                ReflectionUtils.setField(field, rateClass, value);
+            }
+        }
     }
 }
