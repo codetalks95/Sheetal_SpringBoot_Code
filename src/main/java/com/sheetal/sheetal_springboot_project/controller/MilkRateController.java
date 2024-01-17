@@ -18,8 +18,13 @@ public class MilkRateController {
         this.rateService = rateService;
     }
 
-    @GetMapping(value = "/getMappingForMilkRate", produces = {"application/xml", "text/xml"}, consumes = MediaType.ALL_VALUE)
-    public Model getMappingForMilkRate() {
+    @GetMapping(value = "/getMappingForMilkRateInXML", produces = {"application/xml", "text/xml"}, consumes = MediaType.ALL_VALUE)
+    public Model getMappingForMilkRateInXML() {
+        return rateService.getMilkRateData();
+    }
+
+    @GetMapping(value = "/getMappingForMilkRateInJson")
+    public Model getMappingForMilkRateInJson() {
         return rateService.getMilkRateData();
     }
 
@@ -29,17 +34,32 @@ public class MilkRateController {
     }
 
     @PutMapping("/putMappingForMilkRate/{milkRate}/{id}")
-    public Model putMappingForMilkRate(@PathVariable int milkRate , @PathVariable int id) {
-        return rateService.updateDataForMilkRate(milkRate,id);
+    public Model putMappingForMilkRate(@PathVariable int milkRate, @PathVariable int id) {
+        return rateService.updateDataForMilkRate(milkRate, id);
     }
 
     @PatchMapping("/patchMappingForMilkRate/{id}")
-    public Model patchMappingForMilkRate(@PathVariable int id , @RequestBody Map<String, Object> map) {
-        return rateService.partialUpdateDataForMilkRate(id , map);
+    public Model patchMappingForMilkRate(@PathVariable int id, @RequestBody Map<String, Object> map) {
+        return rateService.partialUpdateDataForMilkRate(id, map);
     }
 
     @DeleteMapping("/deleteMappingForMilkRate/{id}")
     public Model deleteMappingForMilkRate(@PathVariable int id) {
         return rateService.deleteDataFromMilkRate(id);
+    }
+
+    @GetMapping(value = "/getMappingForMilkRateByMilkRate/{milkRate}")
+    public Model getMappingForMilkRateByMilkRate(@PathVariable double milkRate) {
+        return rateService.getMilkRateDataByMilkRate(milkRate);
+    }
+
+    @GetMapping(value = "/getMilkRateDataByOrder")
+    public Model getMilkRateDataByOrder() {
+        return rateService.getMilkRateDataByOrder();
+    }
+
+    @GetMapping(value = "/getMilkRateDataByJPQL/{milkRate}")
+    public Model getMilkRateDataByJPQL(@PathVariable double milkRate) {
+        return rateService.getMilkRateDataByJPQL(milkRate);
     }
 }

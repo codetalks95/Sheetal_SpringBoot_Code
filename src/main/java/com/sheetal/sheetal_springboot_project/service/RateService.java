@@ -13,6 +13,7 @@ import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -129,5 +130,46 @@ public class RateService {
                 ReflectionUtils.setField(field, rateClass, value);
             }
         }
+    }
+
+    public Model getMilkRateDataByMilkRate(double milkRate) {
+        Model model = new Model();
+        MilkRateClass milkRateClass = milkRateRepository.findByRateMilkRate(milkRate);
+        if (milkRateClass != null) {
+            model.setMilkRateClass(milkRateClass);
+            model.setMessage("The Data has been successfully fetched!");
+            model.setStatus(200);
+        } else {
+            model.setMessage("Particular Milk Rate is not found in the repository!");
+            model.setStatus(404);
+        }
+        return model;
+    }
+
+    public Model getMilkRateDataByOrder() {
+        Model model = new Model();
+        List<MilkRateClass> milkRateClass = milkRateRepository.getOrderOfMilkRate();
+        if (milkRateClass != null) {
+            model.setMilkRateClassList(milkRateClass);
+            model.setMessage("The Data has been successfully fetched!");
+            model.setStatus(200);
+        } else {
+            model.setMessage("Unable to Order it!");
+            model.setStatus(404);
+        }
+        return model;
+    }
+    public Model getMilkRateDataByJPQL(double milkRate) {
+        Model model = new Model();
+        MilkRateClass milkRateClass = milkRateRepository.findByMilkRate(milkRate);
+        if (milkRateClass != null) {
+            model.setMilkRateClass(milkRateClass);
+            model.setMessage("The Data has been successfully fetched!");
+            model.setStatus(200);
+        } else {
+            model.setMessage("Particular Milk Rate is not found in the repository!");
+            model.setStatus(404);
+        }
+        return model;
     }
 }
