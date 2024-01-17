@@ -4,13 +4,14 @@ import com.sheetal.sheetal_springboot_project.entity.MilkRateClass;
 import com.sheetal.sheetal_springboot_project.entity.RateClass;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Data;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
 @XmlRootElement
 @Data
 public class Model {
-    private int status;
+    private HttpStatus status;
     private String message;
     private RateClass rateClass;
     private MilkRateClass milkRateClass;
