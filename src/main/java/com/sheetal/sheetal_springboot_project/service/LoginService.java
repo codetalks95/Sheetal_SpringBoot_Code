@@ -5,14 +5,12 @@ import com.sheetal.sheetal_springboot_project.repository.LoginCredentialsReposit
 import com.sheetal.sheetal_springboot_project.response.LoginResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-import static com.sheetal.sheetal_springboot_project.constants.Constants.DATA_FETCHED;
-import static com.sheetal.sheetal_springboot_project.constants.Constants.DATA_SAVED;
+import static com.sheetal.sheetal_springboot_project.constants.Constants.*;
 
 @Service
 public class LoginService {
@@ -56,11 +54,11 @@ public class LoginService {
         LoginResponse loginResponse = new LoginResponse();
         if (loginCredentials1.isPresent() && bCryptPasswordEncoder.matches(loginCredentials.getUserName(), loginCredentials1.get().getUserName()) && bCryptPasswordEncoder.matches(loginCredentials.getPassword(), loginCredentials1.get().getPassword())) {
             loginResponse.setStatus(HttpStatus.OK);
-            loginResponse.setMessage("The Credentials have been verified");
+            loginResponse.setMessage(CREDENTIALS_VERIFIED_MESSAGE);
             loginResponse.setLoginCredentials(loginCredentials1.get());
         } else {
             loginResponse.setStatus(HttpStatus.NOT_FOUND);
-            loginResponse.setMessage("The Credentials is not correct");
+            loginResponse.setMessage(CREDENTIALS_INCORRECT_MESSAGE);
             loginResponse.setLoginCredentials(loginCredentials1.get());
         }
         return loginResponse;
