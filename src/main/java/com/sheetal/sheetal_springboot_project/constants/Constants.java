@@ -9,6 +9,4 @@ public abstract class Constants {
     public static final String DATA_CANT_BE_PROCESSED = "Unable to Order it!";
     public static final String CREDENTIALS_INCORRECT_MESSAGE = "The Credentials is not correct";
     public static final String CREDENTIALS_VERIFIED_MESSAGE = "The Credentials have been verified";
-
-
 }
