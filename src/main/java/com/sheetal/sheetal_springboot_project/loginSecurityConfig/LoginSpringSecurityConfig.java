@@ -2,7 +2,6 @@ package com.sheetal.sheetal_springboot_project.loginSecurityConfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -33,25 +32,25 @@ public class LoginSpringSecurityConfig {
         return new InMemoryUserDetailsManager(admin, user);
     }
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/**").hasAnyRole("ADMIN","USER")
-                                .requestMatchers("/**")
-                                .authenticated())
-                .httpBasic(Customizer.withDefaults()).build();
-    }
-
 //    @Bean
 //    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        return http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(auth -> {
-//                    auth.requestMatchers("/**").permitAll();
-//                    auth.anyRequest().authenticated();
-//                }).oauth2Login(withDefaults()).
-//                formLogin(withDefaults()).
-//                build();
+//        return http.csrf(AbstractHttpConfigurer::disable)
+//                .authorizeHttpRequests(auth ->
+//                        auth.requestMatchers("/**").hasAnyRole("ADMIN","USER")
+//                                .requestMatchers("/**")
+//                                .authenticated())
+//                .httpBasic(Customizer.withDefaults()).build();
 //    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(auth -> {
+                    auth.requestMatchers("/**").permitAll();
+                    auth.anyRequest().authenticated();
+                }).oauth2Login(withDefaults()).
+                formLogin(withDefaults()).
+                build();
+    }
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
