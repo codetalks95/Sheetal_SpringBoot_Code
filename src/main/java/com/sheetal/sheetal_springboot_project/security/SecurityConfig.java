@@ -1,4 +1,4 @@
-package com.sheetal.sheetal_springboot_project.loginSecurityConfig;
+package com.sheetal.sheetal_springboot_project.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +18,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-public class LoginSpringSecurityConfig {
+public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails admin = User.withUsername("sheetal")
