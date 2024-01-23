@@ -20,12 +20,12 @@ public class LoginController {
     }
 
     @GetMapping(value = "/getLoginCredentials")
-    public LoginResponse getMappingForMilkRateInJson() {
+    public LoginResponse getLoginCredentials() {
         return loginService.getLoginCredentials();
     }
 
     @PostMapping("/saveLoginCredentials")
-    public LoginResponse postMappingForMilkRate(@RequestBody LoginCredentials loginCredentials) {
+    public LoginResponse saveLoginCredentials(@RequestBody LoginCredentials loginCredentials) {
         return loginService.saveCredentials(loginCredentials);
     }
 
