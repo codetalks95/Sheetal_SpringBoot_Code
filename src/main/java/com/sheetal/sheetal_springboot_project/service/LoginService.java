@@ -3,6 +3,8 @@ package com.sheetal.sheetal_springboot_project.service;
 import com.sheetal.sheetal_springboot_project.entity.LoginCredentials;
 import com.sheetal.sheetal_springboot_project.repository.LoginCredentialsRepository;
 import com.sheetal.sheetal_springboot_project.response.LoginResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,6 +16,8 @@ import static com.sheetal.sheetal_springboot_project.constants.Constants.*;
 
 @Service
 public class LoginService {
+
+    Logger logger = LoggerFactory.getLogger(LoginService.class);
 
     BCryptPasswordEncoder bCryptPasswordEncoder;
     LoginCredentialsRepository loginCredentialsRepository;
@@ -31,6 +35,7 @@ public class LoginService {
         loginCredentialsValue.setUserName(bCryptPasswordEncoder.encode(loginCredentials.getUserName()));
         loginCredentialsValue.setPassword(bCryptPasswordEncoder.encode(loginCredentials.getPassword()));
         loginCredentialsRepository.save(loginCredentialsValue);
+        logger.info("Login Credentials Value is:{}", loginCredentialsValue);
         loginResponse.setStatus(HttpStatus.OK);
         loginResponse.setMessage(DATA_SAVED);
         Optional<LoginCredentials> loginCredentials1 = loginCredentialsRepository.findTopByOrderByIdDesc();
@@ -45,6 +50,9 @@ public class LoginService {
             loginResponse.setStatus(HttpStatus.OK);
             loginResponse.setMessage(DATA_FETCHED);
             loginResponse.setLoginCredentials(loginCredentials.get());
+            logger.debug("Login Credentials Value is:{}", loginCredentials.get());
+        } else {
+            logger.error("The Id is not Present");
         }
         return loginResponse;
     }
@@ -61,6 +69,7 @@ public class LoginService {
             loginResponse.setMessage(CREDENTIALS_INCORRECT_MESSAGE);
             loginCredentials1.ifPresent(loginResponse::setLoginCredentials);
         }
+        logger.warn("Your Credentials are sensitive , please don't use it in production.");
         return loginResponse;
     }
 }
