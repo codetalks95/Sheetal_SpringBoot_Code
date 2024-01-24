@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+    <!-- Appender for writing logs to a file -->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>C:\Users\91830\Downloads\logs\my-application.log</file>
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/my-application.%d{yyyy-MM-dd}.log
+            </fileNamePattern> <!-- Create a new log file daily -->
+            <maxHistory>7</maxHistory> <!-- Keep up to 7 days of log files -->
+        </rollingPolicy>
     </appender>
 
     <root level="info">
