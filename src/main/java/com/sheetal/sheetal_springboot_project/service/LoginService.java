@@ -34,7 +34,7 @@ public class LoginService {
         loginResponse.setStatus(HttpStatus.OK);
         loginResponse.setMessage(DATA_SAVED);
         Optional<LoginCredentials> loginCredentials1 = loginCredentialsRepository.findTopByOrderByIdDesc();
-        loginResponse.setLoginCredentials(loginCredentials1.get());
+        loginCredentials1.ifPresent(loginResponse::setLoginCredentials);
         return loginResponse;
     }
 
@@ -59,7 +59,7 @@ public class LoginService {
         } else {
             loginResponse.setStatus(HttpStatus.NOT_FOUND);
             loginResponse.setMessage(CREDENTIALS_INCORRECT_MESSAGE);
-            loginResponse.setLoginCredentials(loginCredentials1.get());
+            loginCredentials1.ifPresent(loginResponse::setLoginCredentials);
         }
         return loginResponse;
     }

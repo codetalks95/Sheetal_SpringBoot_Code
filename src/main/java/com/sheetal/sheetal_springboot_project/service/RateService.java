@@ -49,7 +49,7 @@ public class RateService {
                 rateClass.setPaneerRate(Math.round(rateClass1.get().getMilkRate() * 8 / 3));
                 rateClass.setDate(String.valueOf(new Date()));
             }
-            model.setMilkRateClass(rateClass1.get());
+            rateClass1.ifPresent(model::setMilkRateClass);
             model.setMessage(DATA_FETCHED);
             model.setStatus(HttpStatus.OK);
             model.setRateClass(rateClass);

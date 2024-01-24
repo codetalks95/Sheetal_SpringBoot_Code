@@ -1,6 +1,6 @@
 package com.sheetal.sheetal_springboot_project.commentedCode;
 
-public class CommentedCode {
+public class CodeForConstructor {
 
 //    private final RateService rateService;
 

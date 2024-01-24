@@ -10,10 +10,10 @@ import java.util.Optional;
 public interface MilkRateRepository extends JpaRepository<MilkRateClass, Integer> {
     Optional<MilkRateClass> findTopByOrderByIdDesc();
 
-   @Query(value = "select * from milk_rate where milk_rate=?1",nativeQuery = true)
-   MilkRateClass findByRateMilkRate(double milkRate);
+    @Query(value = "select * from milk_rate where milk_rate=?1", nativeQuery = true)
+    MilkRateClass findByRateMilkRate(double milkRate);
 
-    @Query(value = "select * from milk_rate order by milk_rate",nativeQuery = true)
+    @Query(value = "select * from milk_rate order by milk_rate", nativeQuery = true)
     List<MilkRateClass> getOrderOfMilkRate();
 
     MilkRateClass findByMilkRate(double milkRate);
