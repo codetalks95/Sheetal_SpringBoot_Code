@@ -1,6 +1,7 @@
 package com.sheetal.sheetal_springboot_project.service;
 
 import com.sheetal.sheetal_springboot_project.entity.LoginCredentials;
+import com.sheetal.sheetal_springboot_project.exceptionhandling.LoginCustomException;
 import com.sheetal.sheetal_springboot_project.repository.LoginCredentialsRepository;
 import com.sheetal.sheetal_springboot_project.response.LoginResponse;
 import org.slf4j.Logger;
@@ -57,7 +58,7 @@ public class LoginService {
         return loginResponse;
     }
 
-    public LoginResponse verifyCredentials(LoginCredentials loginCredentials) {
+    public LoginResponse verifyCredentials(LoginCredentials loginCredentials) throws LoginCustomException {
         Optional<LoginCredentials> loginCredentials1 = loginCredentialsRepository.findTopByOrderByIdDesc();
         LoginResponse loginResponse = new LoginResponse();
         if (loginCredentials1.isPresent() && bCryptPasswordEncoder.matches(loginCredentials.getUserName(), loginCredentials1.get().getUserName()) && bCryptPasswordEncoder.matches(loginCredentials.getPassword(), loginCredentials1.get().getPassword())) {
@@ -65,9 +66,10 @@ public class LoginService {
             loginResponse.setMessage(CREDENTIALS_VERIFIED_MESSAGE);
             loginResponse.setLoginCredentials(loginCredentials1.get());
         } else {
-            loginResponse.setStatus(HttpStatus.NOT_FOUND);
-            loginResponse.setMessage(CREDENTIALS_INCORRECT_MESSAGE);
-            loginCredentials1.ifPresent(loginResponse::setLoginCredentials);
+            throw new LoginCustomException(LOGIN_NOT_FOUND);
+//            loginResponse.setStatus(HttpStatus.NOT_FOUND);
+//            loginResponse.setMessage(CREDENTIALS_INCORRECT_MESSAGE);
+//            loginCredentials1.ifPresent(loginResponse::setLoginCredentials);
         }
         logger.warn("Your Credentials are sensitive , please don't use it in production.");
         return loginResponse;

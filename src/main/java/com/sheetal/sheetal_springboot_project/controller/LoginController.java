@@ -1,6 +1,7 @@
 package com.sheetal.sheetal_springboot_project.controller;
 
 import com.sheetal.sheetal_springboot_project.entity.LoginCredentials;
+import com.sheetal.sheetal_springboot_project.exceptionhandling.LoginCustomException;
 import com.sheetal.sheetal_springboot_project.response.LoginResponse;
 import com.sheetal.sheetal_springboot_project.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class LoginController {
     }
 
     @GetMapping(value = "/verifyCredentials")
-    public LoginResponse verifyCredentials(@RequestBody LoginCredentials loginCredentials) {
+    public LoginResponse verifyCredentials(@RequestBody LoginCredentials loginCredentials) throws LoginCustomException {
         return loginService.verifyCredentials(loginCredentials);
     }
 }
