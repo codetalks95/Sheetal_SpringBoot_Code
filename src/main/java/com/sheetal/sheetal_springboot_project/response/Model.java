@@ -6,11 +6,12 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 
+import java.io.Serializable;
 import java.util.List;
 
 @XmlRootElement
 @Data
-public class Model {
+public class Model implements Serializable {
     private HttpStatus status;
     private String message;
     private RateClass rateClass;

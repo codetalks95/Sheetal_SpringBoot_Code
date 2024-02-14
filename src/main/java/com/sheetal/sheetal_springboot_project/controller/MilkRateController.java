@@ -3,12 +3,16 @@ package com.sheetal.sheetal_springboot_project.controller;
 import com.sheetal.sheetal_springboot_project.response.Model;
 import com.sheetal.sheetal_springboot_project.service.RateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController
+@EnableCaching
 public class MilkRateController {
 
     private final RateService rateService;
@@ -49,8 +53,15 @@ public class MilkRateController {
     }
 
     @GetMapping(value = "/getMappingForMilkRateByMilkRate/{milkRate}")
+    @Cacheable(key = "#milkRate", value = "#MilkRateClass")
     public Model getMappingForMilkRateByMilkRate(@PathVariable double milkRate) {
         return rateService.getMilkRateDataByMilkRate(milkRate);
+    }
+
+    @GetMapping(value = "/getMappingForMilkRateByMilkRates/{milkRate}")
+    @CacheEvict(key = "#milkRate", value = "#MilkRateClass")
+    public String getMappingForMilkRateByMilkRateEvict(@PathVariable double milkRate) {
+        return "Cache is Evicted!";
     }
 
     @GetMapping(value = "/getMilkRateDataByOrder")

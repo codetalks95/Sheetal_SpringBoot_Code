@@ -46,6 +46,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/**").permitAll();
+//                    auth.requestMatchers("/").permitAll(); #use if you wish to use the authentication in this case is Oauth2..
                     auth.anyRequest().authenticated();
                 }).oauth2Login(withDefaults()).
                 formLogin(withDefaults()).

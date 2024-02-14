@@ -63,6 +63,7 @@ public class RateService {
     }
 
     public Model saveDataForMilkRate(int milkRate) {
+        System.out.println("Coming from Cache..!!");
         MilkRateClass milkRateClass = new MilkRateClass();
         Model model = new Model();
         model.setMessage(DATA_FETCHED);
@@ -136,6 +137,7 @@ public class RateService {
     }
 
     public Model getMilkRateDataByMilkRate(double milkRate) {
+        System.out.println("Coming from Cache..!!");
         Model model = new Model();
         MilkRateClass milkRateClass = milkRateRepository.findByRateMilkRate(milkRate);
         return setStatusCodeAndResponse(model, milkRateClass);
