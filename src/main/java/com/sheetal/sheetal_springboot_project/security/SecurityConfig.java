@@ -45,7 +45,7 @@ public class SecurityConfig {
                                     antMatcher("/swagger-ui.html"),
                                     antMatcher("/v3/**"),
                                     antMatcher("/h2-console/**")).permitAll()
-                            .requestMatchers(antMatcher("/")).permitAll()
+                            .requestMatchers(antMatcher("/**")).permitAll()
                             .anyRequest().authenticated();
                 })
                 .headers(h -> h.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)) // This so embedded frames in h2-console are working
